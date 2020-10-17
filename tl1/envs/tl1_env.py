@@ -2,6 +2,9 @@ import gym
 from gym import error, spaces, utils
 from gym.utils import seeding
 
+# import tl1
+# env =gym.make('tl1-v0')
+
 
 class tl1_env(gym.Env):
     metadata = {'render.modes': ['human']}
