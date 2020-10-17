@@ -57,7 +57,7 @@ class tl1_env(discrete.DiscreteEnv):
             newrow, newcol = inc(row, col, action)
             newstate = to_s(newrow, newcol)
             newletter = desc[newrow, newcol]
-            done = bytes(newletter) in b'G'
+            done = bytes(newletter) in b''
             reward = float(newletter == b'GH')
             return newstate, reward, done
 
@@ -67,13 +67,13 @@ class tl1_env(discrete.DiscreteEnv):
                 for a in range(4):
                     li = P[s][a]
                     letter = desc[row, col]
-                    if letter in b'G':
-                        li.append((1.0, s, 10, True))
-                    elif letter in b'H':
+                    if letter in b'H':
                         li.append((1.0, s, -5, True))
+                    if letter in b'GH':
+                        li.append((1.0, s, 10, True))
                     else:
                           li.append((
-                            1., *update_probability_matrix(row, col, a)
+                            1.0, *update_probability_matrix(row, col, a)
                            ))
 
         super(tl1_env, self).__init__(nS, nA, P, isd)
