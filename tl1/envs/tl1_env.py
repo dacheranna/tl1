@@ -34,7 +34,7 @@ class tl1_env(gym.Env):
             startpos = self.startPosition
         self.position = startpos
         self.action_space = spaces.Discrete(4)
-        self.observation_space = spaces.Box(np.array([0, 0]), np.array([2, 3]), dtype=np.int)
+        self.observation_space = spaces.Box(low=np.array([0, 0]), high=np.array([2, 3]), dtype=np.int)
         desc = mm
         self.desc = desc = np.asarray(desc, dtype='c')
 
@@ -49,7 +49,7 @@ class tl1_env(gym.Env):
             col = min(col + 1, 3)
         elif a == UP:
             row = max(row - 1, 0)
-        return (row, col)
+        return row, col
 
     def step(self, action):
         reward = 0
